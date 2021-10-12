@@ -5,6 +5,8 @@ import java.util.List;
 import com.qa.dfelibrary1.data.Library;
 
 public interface LibraryService {
+	
+	public List<Library> getLibraryByName (String name);
 
 	public Library getLibraryByIndex(Integer id);
 

@@ -2,19 +2,28 @@ package com.qa.dfelibrary1.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.springframework.context.annotation.Primary;
+//import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.qa.dfelibrary1.data.Library;
 
-@Primary
+//@Primary
 @Service
 
 public class LibraryServiceList implements LibraryService {
 	
 	private List<Library> libraries = new ArrayList<>();
 
+	@Override
+	public List<Library> getLibraryByName(String name) {
+		
+		return this.libraries.stream().filter(library -> name.equalsIgnoreCase(library.getName()))
+				.collect(Collectors.toList());
+	}
+	
+	
 	@Override
 	public Library getLibraryByIndex(Integer id) {
 
@@ -46,4 +55,6 @@ public class LibraryServiceList implements LibraryService {
 		Library toDelete = this.libraries.get(id);
 		this.libraries.remove(toDelete);
 	}
+
+
 }

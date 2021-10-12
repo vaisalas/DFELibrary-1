@@ -28,13 +28,14 @@ public class LibraryController {
 		this.service = service;
 	}
 
+	
 	@GetMapping("/getLibrary/{id}") 
 	public Library getLibraryByIndex(@PathVariable Integer id) {
 
 		return this.service.getLibraryByIndex(id);
 	}
 
-	@GetMapping("/getAllLibrarys")
+	@GetMapping("/getAllLibraries")
 	public List<Library> getAllLibraries() {
 
 		return this.service.getAllLibraries();
