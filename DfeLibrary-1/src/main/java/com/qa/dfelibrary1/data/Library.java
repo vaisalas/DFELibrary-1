@@ -1,16 +1,28 @@
 package com.qa.dfelibrary1.data;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+
 public class Library {
 	
-	private String title;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	private String name;
 
 	private String author;
 
 	private String genre;
 
-	public Library(String title, String author, String genre) {
+	public Library(Integer id, String name, String author, String genre) {
 		super();
-		this.title = title;
+		this.id = id;
+		this.name = name;
 		this.author = author;
 		this.genre = genre;
 	}
@@ -19,12 +31,20 @@ public class Library {
 		super();
 	}
 
-	public String getTitle() {
-		return title;
+	public Integer getId() {
+		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
+	public String getName() {
+		return name;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getAuthor() {
@@ -45,7 +65,7 @@ public class Library {
 
 	@Override
 	public String toString() {
-		return "Library [title=" + title + ", author=" + author + ", genre=" + genre + "]";
+		return "Library [name=" + name + ", author=" + author + ", genre=" + genre + "]";
 	}
 
 }
