@@ -1,8 +1,9 @@
 package com.qa.dfelibrary1;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController 
+@RestController
 @CrossOrigin
 
 public class LibraryController {
@@ -21,35 +22,40 @@ public class LibraryController {
 
 
 
-	@GetMapping("/getLibrary/{id}")
-	public Library getLibraryByIndex(@PathVariable Integer id) {
+	@GetMapping("/getLibrary/{id}") 
+	public Library getLibrarylByIndex(@PathVariable Integer id) {
+
 		return this.librarys.get(id);
 	}
 
-	@GetMapping("/getAllLibrary")
-	public List<Library> getAllLibrary() {
+	@GetMapping("/getAllLibrarys")
+	public List<Library> getAllLibrarys() {
+
 		return this.librarys;
 	}
 
 	@PostMapping("/createLibrary")
-	public Library createLibrary(@RequestBody Library library) {
+	public ResponseEntity<Library> createLibrary(@RequestBody Library library) {
 		System.out.println("CREATED Library: " + library);
 		this.librarys.add(library);
-		return this.librarys.get(this.librarys.size() - 1);
+		Library responseBody = this.librarys.get(this.librarys.size() - 1);
+		ResponseEntity<Library> response = new ResponseEntity<Library>(responseBody, HttpStatus.CREATED);
+		return response;
 	}
 
 	@PutMapping("/updateLibrary/{id}")
-	public Library updateLibrary(@RequestBody Library library, @PathVariable Integer id) {
+	public ResponseEntity<Library> updateLibrary(@RequestBody Library library, @PathVariable Integer id) {
 		System.out.println("UPDATED Library: " + library);
 		System.out.println("ID: " + id);
-		return this.librarys.set(id, library);
+		Library responseBody = this.librarys.set(id, library);
+		return new ResponseEntity<Library>(responseBody, HttpStatus.ACCEPTED);
 	}
 
-	@DeleteMapping("/removeLibrary/{id}")
-	public String deleteLibrary(@PathVariable Integer id) {
+	@DeleteMapping("/removeLibrary/{id}") 
+	public ResponseEntity<?> deleteLibrary(@PathVariable Integer id) {
 		Library toDelete = this.librarys.get(id);
 		this.librarys.remove(toDelete);
-		return "Deleted: " + toDelete;
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 }
