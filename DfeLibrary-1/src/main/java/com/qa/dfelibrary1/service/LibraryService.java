@@ -16,6 +16,6 @@ public interface LibraryService {
 
 	public Library updateLibrary(Library library, Integer id);
 
-	public void deleteLibrary(Integer id);
+	public boolean deleteLibrary(Integer id);
 	
 }

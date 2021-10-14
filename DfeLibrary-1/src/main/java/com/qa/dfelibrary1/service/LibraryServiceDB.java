@@ -54,8 +54,10 @@ public class LibraryServiceDB implements LibraryService {
 	}
 
 	@Override
-	public void deleteLibrary(Integer id) {
+	public boolean deleteLibrary(Integer id) {
 		this.repo.deleteById(id);
+		boolean exists = this.repo.existsById(id);
+		return !exists;
 	}
 
 }

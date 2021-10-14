@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.qa.dfelibrary1.data.Library;
@@ -15,24 +14,22 @@ import com.qa.dfelibrary1.data.Library;
 public class LibraryServiceList implements LibraryService {
 	
 	private List<Library> libraries = new ArrayList<>();
-
+	
 	@Override
 	public List<Library> getLibraryByName(String name) {
-		
 		return this.libraries.stream().filter(library -> name.equalsIgnoreCase(library.getName()))
 				.collect(Collectors.toList());
 	}
-	
-	
+
 	@Override
 	public Library getLibraryByIndex(Integer id) {
-
+		
 		return this.libraries.get(id);
 	}
 
 	@Override
 	public List<Library> getAllLibraries() {
-
+		
 		return this.libraries;
 	}
 
@@ -47,14 +44,13 @@ public class LibraryServiceList implements LibraryService {
 	public Library updateLibrary(Library library, Integer id) {
 		System.out.println("UPDATED Library: " + library);
 		System.out.println("ID: " + id);
-		return this.libraries.set(id, library); 
+		return this.libraries.set(id, library);
 	}
 
 	@Override
-	public void deleteLibrary(Integer id) {
+	public boolean deleteLibrary(Integer id) {
 		Library toDelete = this.libraries.get(id);
-		this.libraries.remove(toDelete);
+		return this.libraries.remove(toDelete);
 	}
-
 
 }
