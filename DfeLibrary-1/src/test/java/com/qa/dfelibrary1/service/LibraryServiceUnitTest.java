@@ -27,7 +27,7 @@ public class LibraryServiceUnitTest {
 	@Test
 	void testGetByName() {
 		final String name = "Gone Girl";
-		final List<Library> libraries = List.of(new Library(1, name, "Kangaroo", "Red"));
+		final List<Library> libraries = List.of(new Library(1, name, "Gillian Flynn", "Thriller"));
 
 		Mockito.when(this.repo.findByName(name)).thenReturn(libraries);
 
@@ -39,7 +39,7 @@ public class LibraryServiceUnitTest {
 	@Test
 	void testGetById() {
 		final Integer Id = 1;
-		final Library library = new Library(Id, "Jack", "Kangaroo", "Red");
+		final Library library = new Library(Id, "Gone Girl", "Gillian Flynn", "Thriller");
 
 		Mockito.when(this.repo.findById(Id)).thenReturn(Optional.of(library));
 
@@ -50,8 +50,8 @@ public class LibraryServiceUnitTest {
 
 	@Test
 	void testGetAllMLibraries() {
-		final List<Library> libraries = List.of(new Library(1, "Jack", "Kangaroo", "Red"),
-				new Library(2, "Wally", "Wallaby", "Grey"));
+		final List<Library> libraries = List.of(new Library(1, "Gone Girl", "Gillian Flynn", "Thriller"),
+				new Library(2, "The Reckoning", "John Grisham", "Legal Thriller"));
 
 		Mockito.when(this.repo.findAll()).thenReturn(libraries);
 
@@ -63,10 +63,10 @@ public class LibraryServiceUnitTest {
 	@Test
 	void testUpdate() { 
 		final Integer id = 1;
-		Library library = new Library(id, "Jack", "kangaroo", "red");
+		Library library = new Library(id, "Gone Girl", "Gillian Flynn", "Thriller");
 		Optional<Library> optionalLibrary = Optional.of(library);
 
-		Library newLibrary = new Library(id, "Wally", "Wallabee", "grey");
+		Library newLibrary = new Library(id, "The Reckoning", "John Grisham", "Legal Thriller");
 
 		Mockito.when(this.repo.findById(id)).thenReturn(optionalLibrary);
 		Mockito.when(this.repo.save(newLibrary)).thenReturn(newLibrary);
@@ -79,8 +79,8 @@ public class LibraryServiceUnitTest {
 
 	@Test
 	void testCreate() {
-		Library newLibrary = new Library(null, "Jack", "Kangaroo", "Red");
-		Library savedLibrary = new Library(1, "Jack", "Kangaroo", "Red");
+		Library newLibrary = new Library(null, "Gone Girl", "Gillian Flynn", "Thriller");
+		Library savedLibrary = new Library(1, "Gone Girl", "Gillian Flynn", "Thriller");
 
 		Mockito.when(this.repo.save(newLibrary)).thenReturn(savedLibrary);
 
