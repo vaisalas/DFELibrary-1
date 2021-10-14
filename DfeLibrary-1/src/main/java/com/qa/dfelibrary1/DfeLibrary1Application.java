@@ -13,13 +13,7 @@ public class DfeLibrary1Application {
 
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(DfeLibrary1Application.class, args);
-
-		LibraryController controllerBean = context.getBean(LibraryController.class);
-
-		System.out.println(controllerBean);
-
-		LibraryController myController = new LibraryController(new LibraryServiceList());
-
-		System.out.println(new LibraryServiceList() instanceof LibraryService);
+		
+		
 	}
 }
