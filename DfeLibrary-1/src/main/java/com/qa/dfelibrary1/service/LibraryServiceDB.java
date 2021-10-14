@@ -43,7 +43,7 @@ public class LibraryServiceDB implements LibraryService {
 
 	@Override
 	public Library updateLibrary(Library library, Integer id) {
-		// NEVER TRY AND CHANGE THE ID
+		
 		Library toUpdate = this.repo.findById(id).get();
 
 		toUpdate.setGenre(library.getGenre());
