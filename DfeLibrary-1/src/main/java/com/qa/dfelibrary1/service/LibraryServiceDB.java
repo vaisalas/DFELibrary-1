@@ -1,11 +1,13 @@
 package com.qa.dfelibrary1.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.qa.dfelibrary1.data.Library;
+import com.qa.dfelibrary1.exception.LibraryNotFoundException;
 import com.qa.dfelibrary1.repo.LibraryRepo;
 
 @Service
@@ -13,7 +15,6 @@ import com.qa.dfelibrary1.repo.LibraryRepo;
 public class LibraryServiceDB implements LibraryService {
 	
 	private LibraryRepo repo;
-	
 	
 	
 	public LibraryServiceDB(LibraryRepo repo) {
@@ -28,7 +29,7 @@ public class LibraryServiceDB implements LibraryService {
 
 	@Override
 	public Library getLibraryByIndex(Integer id) {
-		return this.repo.findById(id).get();
+		return this.repo.findById(id).orElseThrow(LibraryNotFoundException::new);
 	}
 
 	@Override
@@ -44,6 +45,7 @@ public class LibraryServiceDB implements LibraryService {
 	@Override
 	public Library updateLibrary(Library library, Integer id) {
 		
+		//Optional<Library> optionalLibrary = this.repo.findById(id);
 		Library toUpdate = this.repo.findById(id).get();
 
 		toUpdate.setGenre(library.getGenre());
@@ -51,6 +53,7 @@ public class LibraryServiceDB implements LibraryService {
 		toUpdate.setName(library.getName());
 
 		return this.repo.save(toUpdate);
+				
 	}
 
 	@Override
