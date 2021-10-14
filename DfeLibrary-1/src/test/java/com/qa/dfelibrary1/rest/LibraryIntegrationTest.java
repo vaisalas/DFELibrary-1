@@ -33,7 +33,7 @@ public class LibraryIntegrationTest {
 			final Library testLibrary = new Library(null, "Gone Girl", "Gillian Flynn", "Thriller");
 			String testLibraryAsJSON = this.mapper.writeValueAsString(testLibrary);
 
-			final Library savedLibrary = new Library(1, "Gone Girl", "Gillian Flynn", "Red");
+			final Library savedLibrary = new Library(1, "Gone Girl", "Gillian Flynn", "Thriller");
 			String savedLibraryAsJSON = this.mapper.writeValueAsString(savedLibrary);
 
 			
@@ -48,8 +48,8 @@ public class LibraryIntegrationTest {
 
 		void testCreateAbrdiged() throws Exception {
 			final String testLibraryAsJSON = this.mapper
-					.writeValueAsString(new Library(null, "Jack", "Kangaroo", "Red"));
-			final String savedLibraryAsJSON = this.mapper.writeValueAsString(new Library(1, "Jack", "Kangaroo", "Red"));
+					.writeValueAsString(new Library(null, "Gone Girl", "Gillian Flynn", "Thriller"));
+			final String savedLibraryAsJSON = this.mapper.writeValueAsString(new Library(1, "Gone Girl", "Gillian Flynn", "Thriller"));
 
 			this.mvc.perform(post("/createLibrary").contentType(MediaType.APPLICATION_JSON).content(testLibraryAsJSON))
 					.andExpect(status().isCreated()).andExpect(content().json(savedLibraryAsJSON));
